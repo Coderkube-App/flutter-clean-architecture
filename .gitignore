@@ -91,3 +91,6 @@ Thumbs.db
 *.bin
 *.lock
 *.probe
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore

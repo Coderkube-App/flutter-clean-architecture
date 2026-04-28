@@ -1,217 +1,211 @@
-# 📱 Flutter Architecture Demo (MVVM + GetX)
+# Flutter Architecture Template (MVVM + GetX)
 
-A scalable Flutter project demonstrating a clean and maintainable architecture using **MVVM (Model - View - ViewModel)** with **GetX** for state management, routing, and dependency injection.
+A scalable Flutter project structured using **MVVM (Model - View - ViewModel)** with **GetX** for state management, routing, and dependency injection.
 
-This project acts as a **standard architecture template** for all applications to ensure consistency, scalability, and clean code practices.
-
----
-
-## 🏗️ Architecture Overview
-
-This project follows:
-
-- ✅ MVVM Architecture
-- ✅ Feature-Based Modular Structure
-- ✅ Repository Pattern
-- ✅ Clean Separation of Concerns
+This repository serves as a **standard architecture blueprint** for building consistent, maintainable, and production-ready Flutter applications.
 
 ---
 
-## 🧭 Architecture Diagram
+## Architecture Overview
 
-        ┌──────────────┐
-        │     View     │
-        │ (UI Layer)   │
-        └──────┬───────┘
-               │
-               ▼
-        ┌──────────────┐
-        │  ViewModel   │
-        │  (GetX Ctrl) │
-        └──────┬───────┘
-               │
-               ▼
-        ┌──────────────┐
-        │ Repository   │
-        │ (Abstraction)│
-        └──────┬───────┘
-               │
-               ▼
-        ┌──────────────┐
-        │   Provider   │
-        │  (API Layer) │
-        └──────┬───────┘
-               │
-               ▼
-        ┌──────────────┐
-        │     API      │
-        └──────────────┘
+This project is designed with:
+
+* MVVM architecture pattern
+* Feature-based modular structure
+* Repository pattern
+* Clear separation of concerns
 
 ---
 
-## 📂 Project Structure
+## Architecture Diagram
 
+```
+View (UI)
+   ↓
+ViewModel (GetX Controller)
+   ↓
+Repository
+   ↓
+Provider (API Layer)
+   ↓
+API
+```
 
+---
+
+## Project Structure
+
+```
 lib/
 ├── core/
-│ ├── constants/ # App constants
-│ ├── localization/ # Language support
-│ ├── network/ # API client, interceptors
-│ ├── services/ # Shared services
-│ ├── storage/ # Local storage
-│ ├── theme/ # App theme & styling
-│ ├── utils/ # Helpers & extensions
-│ ├── widgets/ # Reusable widgets
+│   ├── constants/       # App-wide constants
+│   ├── localization/    # Language support
+│   ├── network/         # API client & interceptors
+│   ├── services/        # Shared services
+│   ├── storage/         # Local storage handling
+│   ├── theme/           # Styling & themes
+│   ├── utils/           # Helpers & extensions
+│   └── widgets/         # Reusable UI components
 │
 ├── data/
-│ ├── models/ # API response models
-│ ├── providers/ # API calls
-│ ├── repositories/ # Repository implementations
+│   ├── models/          # API response models
+│   ├── providers/       # API calls
+│   └── repositories/    # Repository implementations
 │
 ├── domain/
-│ ├── entities/ # Business models (clean)
-│ ├── repositories/ # Abstract contracts
+│   ├── entities/        # Business models
+│   └── repositories/    # Abstract contracts
 │
-├── modules/ # Feature-based modules
-│ ├── auth/
-│ ├── home/
-│ ├── profile/
+├── modules/             # Feature-based modules
+│   ├── auth/
+│   ├── home/
+│   └── profile/
 │
 ├── routes/
-│ ├── app_pages.dart # Route pages
-│ ├── app_routes.dart # Route names
+│   ├── app_pages.dart   # Route definitions
+│   └── app_routes.dart  # Route names
 │
-├── main.dart
-
-
----
-
-## 🧠 Architecture Layers
-
-### 🔹 View (UI Layer)
-- Screens & Widgets
-- Observes ViewModel
-- No business logic
+└── main.dart
+```
 
 ---
 
-### 🔹 ViewModel (GetX Controller)
-- Manages UI state
-- Handles user actions
-- Calls repository
+## Layer Responsibilities
+
+### View
+
+* UI components and screens
+* Observes state from ViewModel
+* Contains no business logic
 
 ---
 
-### 🔹 Domain Layer
-- Contains business logic
-- Defines repository contracts
-- Includes pure entities
+### ViewModel
+
+* Manages UI state
+* Handles user interactions
+* Communicates with repositories
 
 ---
 
-### 🔹 Data Layer
-- Handles API calls (Providers)
-- Converts Models ↔ Entities
-- Implements repositories
+### Domain
+
+* Defines business rules
+* Contains pure entities
+* Declares repository contracts
 
 ---
 
-### 🔹 Core Layer
-- Shared utilities and services
-- Network, storage, theme, localization, etc.
+### Data
+
+* Handles API communication
+* Implements repository logic
+* Transforms models into entities
 
 ---
 
-## 🔁 Data Flow
+### Core
 
+* Shared utilities and services
+* Includes network, storage, theming, and helpers
 
+---
+
+## Data Flow
+
+```
 View → ViewModel → Repository → Provider → API
+```
 
+Response handling:
 
-Response Flow:
-
-
+```
 API → Model → Repository → Entity → ViewModel → View
-
+```
 
 ---
 
-## 📦 Example Flow (Login)
+## Example Flow (Login)
 
-1. User interacts with UI
+1. User triggers an action from UI
 2. View calls ViewModel
-3. ViewModel calls Repository
-4. Repository calls Provider
-5. Provider fetches data from API
-6. Model converts to Entity
-7. ViewModel updates UI
+3. ViewModel invokes Repository
+4. Repository fetches data via Provider
+5. Provider calls API
+6. Response is mapped to Entity
+7. ViewModel updates state
+8. UI reacts to state change
 
 ---
 
-## 🧩 Technologies Used
+## Technologies
 
-- Flutter
-- GetX (State Management + Routing + DI)
-- Dio/http (API Client)
+* Flutter
+* GetX (State Management, Routing, Dependency Injection)
+* Dio / http (Networking)
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1. Install dependencies
+Install dependencies:
 
+```
 flutter pub get
+```
 
+Run the project:
 
-### 2. Run the app
-
+```
 flutter run
-
-
----
-
-## 📌 Guidelines
-
-### ✅ Best Practices
-- Keep ViewModels small and focused
-- Use repository for all data operations
-- Use bindings for dependency injection
-- Keep UI free from business logic
+```
 
 ---
 
-### ❌ Avoid
-- Direct API calls in ViewModel
-- Business logic inside UI
-- Overuse of global state
-- Large controllers
+## Guidelines
+
+### Best Practices
+
+* Keep ViewModels focused and minimal
+* Use repositories for all data operations
+* Maintain clear separation between layers
+* Keep UI free from business logic
 
 ---
 
-## 🎯 Purpose
+### Avoid
 
-- Standardize architecture across projects
-- Improve maintainability
-- Enable scalability
-- Provide a clean starting point
-
----
-
-## 🔮 Future Improvements
-
-- Unit testing support
-- Offline-first architecture
-- Caching layer
-- Modular package separation
+* Direct API calls in ViewModel
+* Business logic inside UI
+* Large and tightly coupled controllers
+* Overuse of global state
 
 ---
 
-## 🤝 Contribution
+## Purpose
 
-This is an internal reference project. Contributions are welcome.
+* Standardize project architecture
+* Improve maintainability and readability
+* Enable scalable development
+* Provide a reusable project foundation
 
 ---
 
-## 📄 License
+## Future Improvements
 
-For internal use only.
+* Testing support
+* Offline-first capability
+* Caching strategies
+* Modular package separation
+
+---
+
+## Contribution
+
+This project serves as a reference architecture. Contributions and improvements are welcome.
+
+---
+
+## License
+
+This project is licensed under the Apache-2.0 License.
